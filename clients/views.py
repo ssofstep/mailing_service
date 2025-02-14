@@ -8,21 +8,21 @@ from clients.models import Clients
 
 class ClientsListView(ListView):
     model = Clients
-    template_name = 'clients/client_list.html'
+    template_name = 'clients/clients_list.html'
 
 
 class ClientsCreateView(CreateView):
     model = Clients
     form_class = ClientForm
     template_name = 'clients/clients_form.html'
-    success_url = reverse_lazy('clients:client_list')
+    success_url = reverse_lazy('clients:clients_list')
 
 
 class ClientsUpdateView(UpdateView):
     model = Clients
     form_class = ClientForm
     template_name = 'clients/clients_form.html'
-    success_url = reverse_lazy('clients:client_list')
+    success_url = reverse_lazy('clients:clients_list')
 
 
 class ClientsDetailView(DetailView):
@@ -31,7 +31,7 @@ class ClientsDetailView(DetailView):
 
 class ClientsDeleteView(DeleteView):
     model = Clients
-    success_url = reverse_lazy('clients:client_list')
+    success_url = reverse_lazy('clients:clients_list')
 
 
 class HomeView(TemplateView):
