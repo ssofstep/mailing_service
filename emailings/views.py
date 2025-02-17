@@ -8,32 +8,32 @@ from emailings.models import Message
 
 class MessageListView(ListView):
     model = Message
-    template_name = 'emailings/emailings_list.html'
+    template_name = 'emailings/messages_list.html'
 
 
 class MessageCreateView(CreateView):
     model = Message
     form_class = MessageForm
-    template_name = 'emailings/emailings_form.html'
-    success_url = reverse_lazy('emailings:emailings_list')
+    template_name = 'emailings/messages_form.html'
+    success_url = reverse_lazy('emailings:messages_list')
 
 
 class MessageUpdateView(UpdateView):
     model = Message
     form_class = MessageForm
-    template_name = 'emailings/emailings_form.html'
-    success_url = reverse_lazy('emailings:emailings_list')
+    template_name = 'emailings/messages_form.html'
+    success_url = reverse_lazy('emailings:messages_list')
 
 
 class MessageDetailView(DetailView):
     model = Message
-    template_name = 'emailings/emailings_detail.html'
+    template_name = 'emailings/messages_detail.html'
 
 
 class MessageDeleteView(DeleteView):
     model = Message
-    template_name = 'emailings/emailings_confirm_delete.html'
-    success_url = reverse_lazy('emailings:emailings_list')
+    template_name = 'emailings/messages_confirm_delete.html'
+    success_url = reverse_lazy('emailings:messages_list')
 
 
 class HomeView(TemplateView):
