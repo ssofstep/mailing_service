@@ -11,10 +11,7 @@
                     <h4 class="my-0 font-weight-normal">{{ email.theme }}</h4>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{ email.body }}</h1>
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>- {{ email.body|truncatechars:100 }}</li>
-                    </ul>
+                    <a href="{% url 'emailings:message_list' %}" class="btn btn-primary">Перейти</a>
                 </div>
             </div>
         </div>
