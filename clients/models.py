@@ -6,6 +6,7 @@ class Clients(models.Model):
     comment = models.TextField(verbose_name="Комментарий о клиенте", blank=True, null=True)
 
 
+
     def __str__(self):
         return f'{self.name} {self.email}'
 

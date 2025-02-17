@@ -6,7 +6,7 @@ from clients.views import ClientsListView, ClientsCreateView, ClientsDetailView,
 app_name = 'clients'
 
 urlpatterns = [
-    path('home', HomeView.as_view(), name='home'),
+    path('', HomeView.as_view(), name='home'),
     path('clients_list', ClientsListView.as_view(), name='clients_list'),
     path('clients/client_create', ClientsCreateView.as_view(), name='client_create'),
     path('clients/client_update/<int:pk>', ClientsUpdateView.as_view(), name='client_update'),

@@ -1,0 +1,9 @@
+{% extends 'emailings/base.html' %}
+{% block title %}Страница сообщения{% endblock %}
+{% block content %}
+<body>
+    <h1>Информация о сообщении</h1>
+    <p>Тема письма: {{ object.theme }}</p>
+    <p>Тело письма: {{ object.body }}</p>
+</body>
+{% endblock %}
