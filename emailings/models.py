@@ -1,6 +1,7 @@
 from django.db import models
 
 from clients.models import Clients
+from users.models import CustomUser
 
 
 class Message(models.Model):
@@ -27,8 +28,12 @@ class Mailing(models.Model):
     start_datetime = models.DateTimeField(verbose_name="Дата и время первой отправки", blank=True, null=True)
     end_datetime = models.DateTimeField(verbose_name="Дата и время окончания отправки", blank=True, null=True)
     status = models.CharField(verbose_name="Статус", choices=STATUS_CHOICES, default='created', max_length=15)
+    successful_attempts = models.IntegerField(default=0)
+    unsuccessful_attempts = models.IntegerField(default=0)
     message = models.ForeignKey(Message, verbose_name="Сообщение", on_delete=models.CASCADE)
     recipients = models.ManyToManyField(Clients, verbose_name="Получатели")
+    all_sent_messages = models.IntegerField(default=0)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return f"{self.start_datetime} - {self.status}"

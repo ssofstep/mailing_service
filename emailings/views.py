@@ -37,18 +37,8 @@ class MessageDeleteView(DeleteView):
 
 
 class HomeView(TemplateView):
-    template_name = 'emailings/home.html'
+    template_name = 'clients/home.html'
 
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        context_data["title"] = "Mailing list management service"
-        context_data["count_mailing"] = Mailing.objects.count()
-        context_data["active_mailing_count"] = Mailing.objects.filter(
-            status="Запущена"
-        ).count()
-        unique_clients_count = Mailing.objects.values("recipients").distinct().count()
-        context_data["unique_clients_count"] = unique_clients_count
-        return context_data
 
 
 

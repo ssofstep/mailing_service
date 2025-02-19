@@ -3,22 +3,63 @@
 
 {% block content %}
 <div class="container">
-    <div class="row text-center">
-        {% for client in  object_list %}
-        <div class="col-3">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ client.name }}</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{ client.email }}</h1>
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>- {{ client.comment|truncatechars:100 }}</li>
-                    </ul>
-                </div>
-            </div>
+    <div class="row">
+      <div class="margin__top col-sm-6 mb-3 mb-sm-0">
+        <div class="card mb-3">
+          <div class="card-body btn-primary">
+              <ul>
+              <li>
+                <p>Создано рассылок: </p>
+                <span class="#">{{ count_mailings }}</span>
+              </li>
+              </ul>
+          </div>
         </div>
-        {% endfor %}
+      </div>
+      <div class="margin__top col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+          <div class="card-body btn-primary">
+              <ul>
+              <li>
+                <p>Количество активных рассылок: </p>
+                <span>{{ active_mailings_count }}</span>
+              </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="margin__top col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+          <div class="card-body btn-primary">
+              <ul>
+              <li>
+                <p>Количество уникальных получателей: </p>
+                <span>{{ unique_clients_count }}</span>
+              </li>
+              </ul>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="margin__top col-sm-6 mb-3 mb-sm-0">
+    <div class="card mt-3">
+        <div class="card-body btn-primary">
+            <ul>
+                <li>
+                    <p>Количество успешных попыток: </p>
+                    <span>{{ successful_attempts }}</span>
+                </li>
+                <li>
+                    <p>Количество неуспешных попыток: </p>
+                    <span>{{ unsuccessful_attempts }}</span>
+                </li>
+                <li>
+                    <p>Всего отправленных сообщений: </p>
+                    <span>{{ all_sent_messages }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 </div>
 {% endblock %}
