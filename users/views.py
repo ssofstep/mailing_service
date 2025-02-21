@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.utils.crypto import get_random_string
 from django.views.generic.edit import CreateView, FormView
@@ -6,6 +8,7 @@ import secrets
 from config.settings import EMAIL_HOST_USER
 from .forms import CustomUserCreationForm, PasswordRecoveryForm
 from .models import CustomUser
+from django.views.generic import ListView
 
 
 class RegisterView(CreateView):
@@ -53,3 +56,16 @@ class PasswordRecoveryView(FormView):
             fail_silently=False,
         )
         return super().form_valid(form)
+
+
+
+class UsersListView(LoginRequiredMixin, ListView):
+    model = CustomUser
+    template_name = "users/users_list.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.has_perm("users.view_customuser"):
+            return HttpResponseForbidden(
+                "К сожалению, у вас нет прав для просмотра списка пользователей."
+            )
+        return super().dispatch(request, *args, **kwargs)

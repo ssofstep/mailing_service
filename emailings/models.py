@@ -42,6 +42,9 @@ class Mailing(models.Model):
         verbose_name = "Рассылка"
         verbose_name_plural = "Рассылки"
         ordering = ["end_datetime"]
+        permissions = [
+            ("can_disable_mailing", "Can disable mailing"),
+        ]
 
 
 class MailingAttempt(models.Model):

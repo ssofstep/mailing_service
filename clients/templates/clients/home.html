@@ -2,7 +2,57 @@
 
 
 {% block content %}
+</div>
+    {% if perms.emailings.view_mailing %}
+    <div class="row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card mb-3 mr-10">
+          <div class="card-body">
+            <h5 class="card-title">Список рассылок</h5>
+            <p class="card-text">Посмотреть</p>
+            <a href="{% url 'emailings:mailings_list' %}" class="btn btn-primary">Перейти</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% if user.is_superuser %}
+      <div class="col-sm-6">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Список сообщений</h5>
+            <p class="card-text">Посмотреть</p>
+            <a href="{% url 'emailings:messages_list' %}" class="btn btn-primary">Перейти</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if perms.clients.view_clients %}
+    <div class="margin__top col-sm-5">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Список клиентов</h5>
+            <p class="card-text">Посмотреть</p>
+            <a href="{% url 'clients:clients_list' %}" class="btn btn-primary">Перейти</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% if perms.users.view_customuser %}
+    <div class="margin__top col-sm-5">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Список пользователей</h5>
+            <p class="card-text">Посмотреть</p>
+            <a href="{% url 'users:users_list' %}" class="btn btn-primary">Перейти</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+
 <div class="container">
+    {% if user.is_superuser %}
     <div class="row">
       <div class="margin__top col-sm-6 mb-3 mb-sm-0">
         <div class="card mb-3">
@@ -62,4 +112,5 @@
     </div>
 </div>
 </div>
+{% endif %}
 {% endblock %}

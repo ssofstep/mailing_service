@@ -38,6 +38,7 @@ class ClientsDeleteView(DeleteView):
 
 class HomeView(TemplateView):
     template_name = 'clients/home.html'
+    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -49,24 +50,27 @@ class HomeView(TemplateView):
         unique_clients_count = Mailing.objects.values("recipients").distinct().count()
         context_data["unique_clients_count"] = unique_clients_count
 
+        if self.request.user.is_authenticated:
+            user = self.request.user
 
-        user = self.request.user
-        user_mailings = Mailing.objects.filter(owner=user)
-        context_data["all_sent_messages"] = (
-                user_mailings.aggregate(Sum("all_sent_messages"))["all_sent_messages__sum"] or 0
-        )
-        context_data["unsuccessful_attempts"] = (
-                user_mailings.aggregate(Sum("unsuccessful_attempts"))[
-                    "unsuccessful_attempts__sum"
-                ]
-                or 0
-        )
-        context_data["successful_attempts"] = (
-                user_mailings.aggregate(Sum("successful_attempts"))[
-                    "successful_attempts__sum"
-                ]
-                or 0
-        )
+            user_mailings = Mailing.objects.filter(owner=user)
+            context_data["all_sent_messages"] = (
+                    user_mailings.aggregate(Sum("all_sent_messages"))["all_sent_messages__sum"] or 0
+            )
+            context_data["unsuccessful_attempts"] = (
+                    user_mailings.aggregate(Sum("unsuccessful_attempts"))[
+                        "unsuccessful_attempts__sum"
+                    ]
+                    or 0
+            )
+            context_data["successful_attempts"] = (
+                    user_mailings.aggregate(Sum("successful_attempts"))[
+                        "successful_attempts__sum"
+                    ]
+                    or 0
+            )
+        else:
+            user = None
 
 
         return context_data

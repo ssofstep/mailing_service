@@ -15,9 +15,11 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>- {{ client.body|truncatechars:100 }}</li>
                     </ul>
+                    {% if user.is_superuser %}
                     <a class="btn btn-primary mb-2" href="{% url 'emailings:message_detail' email.pk %}" role="button">Посмотреть</a>
                     <a class="btn btn-primary mb-2" href="{% url 'emailings:message_update' email.pk %}" role="button">Редактировать</a>
                     <a class="btn btn-primary mb-2" href="{% url 'emailings:message_delete' email.pk %}" role="button">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

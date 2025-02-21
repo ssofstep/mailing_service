@@ -18,9 +18,14 @@
                         <li>- {{ mailing.message|truncatechars:100 }}</li>
                         <li>- {{ mailing.recipientsa.all }}</li>
                     </ul>
+                    {% if user.is_superuser %}
                     <a class="btn btn-primary mb-2" href="{% url 'emailings:mailing_detail' mailing.pk %}" role="button">Посмотреть</a>
                     <a class="btn btn-primary mb-2" href="{% url 'emailings:mailing_update' mailing.pk %}" role="button">Редактировать</a>
                     <a class="btn btn-primary mb-2" href="{% url 'emailings:mailing_delete' mailing.pk %}" role="button">Удалить</a>
+                    {% endif %}
+                    {% if perms.mailings.can_disable_mailing %}
+                    <a class="btn btn-primary mb-2" href="{% url 'emailings:mailing_update' mailing.pk %}" role="button">Изменить статус публикации</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
