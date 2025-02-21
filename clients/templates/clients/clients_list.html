@@ -1,0 +1,29 @@
+{% extends 'clients/base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        {% for client in  object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ client.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ client.email }}</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- {{ client.comment|truncatechars:100 }}</li>
+                    </ul>
+                    {% if user.is_superuser %}
+                    <a class="btn btn-primary mb-2" href="{% url 'clients:client_detail' client.pk %}" role="button">Посмотреть</a>
+                    <a class="btn btn-primary mb-2" href="{% url 'clients:client_update' client.pk %}" role="button">Редактировать</a>
+                    <a class="btn btn-primary mb-2" href="{% url 'clients:client_delete' client.pk %}" role="button">Удалить</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

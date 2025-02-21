@@ -1,0 +1,10 @@
+{% extends 'clients/base.html' %}
+{% block title %}Страница клиента{% endblock %}
+{% block content %}
+<body>
+    <h1>Информация о клиенте</h1>
+    <p>ФИО: {{ object.name }}</p>
+    <p>Почта: {{ object.email }}</p>
+    <p>Комментарий: {{ object.comment }}</p>
+</body>
+{% endblock %}

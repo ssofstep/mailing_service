@@ -1,0 +1,12 @@
+{% extends 'emailings/base.html' %}
+{% block title %}Страница рассылки{% endblock %}
+{% block content %}
+<body>
+    <h1>Информация о рассылки</h1>
+    <p>Дата и время первой отправки: {{ object.start_datetime }}</p>
+    <p>Дата и время окончания отправки: {{ object.end_datetime }}</p>
+    <p>Статус: {{ object.status }}</p>
+    <p>Сообщение: {{ object.message }}</p>
+    <p>Получатели: {{ object.recipients }}</p>
+</body>
+{% endblock %}

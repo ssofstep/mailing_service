@@ -1,0 +1,35 @@
+{% extends 'emailings/base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        {% for mailing in  object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Рассылка</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-title pricing-card-title">{{ mailing.start_datetime }}</p>
+                    <p class="card-title pricing-card-title">{{ mailing.end_datetime }}</p>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- {{ mailing.status }}</li>
+                        <li>- {{ mailing.message|truncatechars:100 }}</li>
+                        <li>- {{ mailing.recipientsa.all }}</li>
+                    </ul>
+                    {% if user.is_superuser %}
+                    <a class="btn btn-primary mb-2" href="{% url 'emailings:mailing_detail' mailing.pk %}" role="button">Посмотреть</a>
+                    <a class="btn btn-primary mb-2" href="{% url 'emailings:mailing_update' mailing.pk %}" role="button">Редактировать</a>
+                    <a class="btn btn-primary mb-2" href="{% url 'emailings:mailing_delete' mailing.pk %}" role="button">Удалить</a>
+                    {% endif %}
+                    {% if perms.mailings.can_disable_mailing %}
+                    <a class="btn btn-primary mb-2" href="{% url 'emailings:mailing_update' mailing.pk %}" role="button">Изменить статус публикации</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
